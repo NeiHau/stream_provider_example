@@ -1,13 +1,14 @@
-import 'package:flutter/material.dart'; // FlutterのUIコンポーネントを使用するために必要なパッケージ
-import 'package:flutter_riverpod/flutter_riverpod.dart'; // Riverpodパッケージを使用するために必要なパッケージ
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-// StreamProviderを定義します。これは1秒ごとに値を増やすストリームを作成します。
+// 1秒ごとに値を増やすストリーム。
 final counterProvider = StreamProvider<int>((ref) {
-  return Stream.periodic(const Duration(seconds: 1), (count) => count);
+  return Stream.periodic(const Duration(seconds: 1), (count) => count)
+      .takeWhile((value) => value <= 10);
 });
 
 class MyApp extends StatelessWidget {
